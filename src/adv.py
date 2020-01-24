@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+from item import Item
 
 # Declare all the rooms
 
@@ -27,9 +28,11 @@ earlier adventurers. The only exit is to the south."""),
 
 room['outside'].n_to = room['foyer']
 room['foyer'].s_to = room['outside']
+room['foyer'].items.append(Item("bottle of wine", "A bottle of fine wine. Probably best not to drink it until after you're done adventuring."))
 room['foyer'].n_to = room['overlook']
 room['foyer'].e_to = room['narrow']
 room['overlook'].s_to = room['foyer']
+room['overlook'].items.append(Item("longbow", "A powerful longbow capable of launching arrows hundreds of feet away."))
 room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
@@ -55,6 +58,7 @@ def main():
     user_input = ""
     player_name = input("Enter player name: ")
     player = Player(player_name, room["outside"])
+    player.inventory.append(Item("sword", "A sharp sword useful for many things, most of them involving killing monsters."))
     while True:
         user_input = input().split()
         if len(user_input) == 1:
